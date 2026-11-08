@@ -1,6 +1,5 @@
 #pragma once
-#include<cmath>
-#include<numbers>
+#include<numbers> //get your constants man
 
 namespace AML
 {

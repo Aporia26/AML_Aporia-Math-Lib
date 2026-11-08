@@ -8,8 +8,8 @@ namespace AML
     {
         float x, y;
   
-       vec2() : x(0.0f), y(0.0f) {}
-       vec2(float _x, float _y) 
+      constexpr vec2() : x(0.0f), y(0.0f) {}
+      constexpr vec2(float _x, float _y) 
          : x(_x), y(_y) {}
 
         // Compounding operators 
@@ -99,10 +99,10 @@ namespace AML
     {
        float x, y, z;
   
-       vec3() : x(0.0f), y(0.0f), z(0.0f) {}
-       vec3(float _x, float _y, float _z) 
+      constexpr vec3() : x(0.0f), y(0.0f), z(0.0f) {}
+      constexpr vec3(float _x, float _y, float _z) 
          : x(_x), y(_y), z(_z) {}
-       vec3(const vec2& v, float _z = 0.0f) //vector conversion casting
+      constexpr vec3(const vec2& v, float _z = 0.0f) //vector conversion casting
          : x(v.x), y(v.y), z(_z) {}
 
         // Compounding operators 
