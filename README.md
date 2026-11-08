@@ -32,16 +32,23 @@ Here is a quick example demonstrating how to include and use the library in a C+
 
 ```cpp
 #include <iostream>
-#include "AML/Vector3.hpp" // Replace with your exact header paths
-#include "AML/Matrix4.hpp"
+#include "AML/Vector.hpp" // Replace with your exact header paths
+#include "AML/Matrix.hpp"
 
 int main() {
     // Example vector operation
-    AML::Vector3 position(1.0f, 2.0f, 3.0f);
-    AML::Vector3 velocity(0.5f, 0.0f, -1.0f);
+    AML::vec3 position(1.0f, 2.0f, 3.0f);
+    AML::vec3 velocity(0.5f, 0.0f, -1.0f);
+
+    AML::mat4 model      = AML::translate(meshPos) * AML::rotateY(meshRot);
+    AML::mat4 view       = AML::look_at(cameraPos, lookTarget, AML::vec3(0, 1, 0));
+    AML::mat4 projection = AML::perspective(0.785f, 16.0f/9.0f, 0.1f, 100.0f);
+
+    // Calculate the complete Model-View-Projection (MVP) matrix chain!
+    AML::mat4 mvpMatrix = projection * view * model; 
     
     // Inlined vector addition
-    AML::Vector3 newPosition = position + velocity;
+    AML::vec3 newPosition = position + velocity;
     
     std::cout << "New Position: (" 
               << newPosition.x << ", " 
