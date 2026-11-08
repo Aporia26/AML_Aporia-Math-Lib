@@ -67,3 +67,7 @@ int main() {
 ## License
 
 This project is licensed under [License](https://github.com/Aporia26/AML_Aporia-Math-Lib/blob/main/LICENSE)
+
+## Upcoming Next
+* Will be adding Quaternions and BHV 
+* And, other 3D stuff later
