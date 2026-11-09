@@ -48,15 +48,7 @@ namespace AML
             lhs.col[1] * scalar,
             lhs.col[2] * scalar
         );
-    }    
-     inline mat3 operator*(float scalar, const mat3& lhs)
-    {
-        return mat3(
-            lhs.col[0] * scalar,
-            lhs.col[1] * scalar,
-            lhs.col[2] * scalar
-        );
-    } 
+    }     
     inline mat3 operator*(float scalar, const mat3& rhs)
     {
         return rhs * scalar;
