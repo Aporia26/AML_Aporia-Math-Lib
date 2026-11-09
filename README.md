@@ -34,6 +34,8 @@ Here is a quick example demonstrating how to include and use the library in a C+
 #include <iostream>
 #include "AML/Vector.hpp" // Replace with your exact header paths
 #include "AML/Matrix.hpp"
+//or use the master header
+#include "AML/AML.hpp"
 
 int main() {
     // Example vector operation
