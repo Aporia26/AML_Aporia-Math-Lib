@@ -73,3 +73,4 @@ This project is licensed under [License](https://github.com/Aporia26/AML_Aporia-
 ## Upcoming Next
 * Will be adding Quaternions and BHV 
 * And, other 3D stuff later
+* SIMD, benchmarking optimizations ig idk
