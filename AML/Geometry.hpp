@@ -37,7 +37,10 @@ namespace AML
         float distance;
 
         constexpr plane() : normal(0.0f, 1.0f, 0.0f), distance(0.0f) {}
-        constexpr plane(const vec3& n, float d) : normal(normalize(n)), distance(d) {}
+        inline plane(const vec3& n, float d) : normal(normalize(n)), distance(d) {}
+        //for optimized use if needed
+         constexpr plane(const vec3& n, float d, bool is_already_normalized) 
+            : normal(n), distance(d) {}
 
         //Returns > 0 if point is in front, < 0 if behind plane
         inline float distance_to_point(const vec3& pt) const
