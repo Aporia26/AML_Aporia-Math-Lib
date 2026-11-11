@@ -84,9 +84,11 @@ namespace AML
         return me.x*me.x + me.y*me.y;
     }
 
-    inline vec2 normalize(const vec2 me) //unit vector
+    inline vec2 normalize(const vec2& me) //unit vector
     {
-        return vec2(me/length(me));
+       float len = length(me);
+        if (len < 1e-6f) return vec2(0.0f, 0.0f);
+        return me / len;
     }
 
     inline float distance(const vec2& head, const vec2& tail)
@@ -181,7 +183,9 @@ namespace AML
 
     inline vec3 normalize(const vec3& me) //unit vector
     {
-        return vec3(me/length(me));
+        float len = length(me);
+        if (len < 1e-6f) return vec3(0.0f, 0.0f, 0.0f);
+        return me / len;
     }
 
     inline float distance(const vec3& head, const vec3& tail)
@@ -197,7 +201,7 @@ namespace AML
         union {
             struct { float x, y, z, w; };
             struct { float r, g, b, a; };
-            struct {};
+           // struct {};
             float data[4];
         };
 
@@ -268,7 +272,9 @@ namespace AML
     }
     inline vec4 normalize(const vec4& me) 
     {
-        return me / length(me);
+        float len = length(me);
+        if (len < 1e-6f) return vec4(0.0f, 0.0f, 0.0f,0.0f);
+        return me / len;
     }
 
     using color = vec4;
@@ -310,7 +316,7 @@ namespace AML
         {
             if (channel < 0.0f) return 0;
             if (channel > 1.0f) return 255;
-            return static_cast<int>(256.0f * channel); // 256 treats 1.0 correctly with scaling
+           return static_cast<int>(255.0f * channel + 0.5f);
         }
     }
 

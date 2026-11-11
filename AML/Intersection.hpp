@@ -1,5 +1,6 @@
 #pragma once
 #include "Geometry.hpp"
+#include <algorithm>
 
 namespace AML
 {
@@ -68,4 +69,36 @@ namespace AML
      float radiusSum = radiusA + radiusB;
      return distanceSqr <= (radiusSum * radiusSum);
     }
+
+    // 3D AABB vs AABB 
+    inline bool overlap_aabb(const AABB& a, const AABB& b)
+    {
+        return (a.max_pt.x >= b.min_pt.x && a.min_pt.x <= b.max_pt.x) &&
+               (a.max_pt.y >= b.min_pt.y && a.min_pt.y <= b.max_pt.y) &&
+               (a.max_pt.z >= b.min_pt.z && a.min_pt.z <= b.max_pt.z);
+    }
+
+    // Ray vs 3D AABB 
+    inline bool hit_aabb(const ray& r, const AABB& box, float t_min, float t_max, float& hit_t)
+    {
+        for (int axis = 0; axis < 3; ++axis)
+        {
+            float origin = (axis == 0) ? r.origin.x : (axis == 1 ? r.origin.y : r.origin.z);
+            float dir    = (axis == 0) ? r.direction.x : (axis == 1 ? r.direction.y : r.direction.z);
+            float bmin   = (axis == 0) ? box.min_pt.x : (axis == 1 ? box.min_pt.y : box.min_pt.z);
+            float bmax   = (axis == 0) ? box.max_pt.x : (axis == 1 ? box.max_pt.y : box.max_pt.z);
+
+            float invD = (std::abs(dir) < 1e-8f) ? ((dir < 0.0f) ? -1e8f : 1e8f) : (1.0f / dir);
+            float t0 = (bmin - origin) * invD;
+            float t1 = (bmax - origin) * invD;
+            if (invD < 0.0f) std::swap(t0, t1);
+
+            t_min = std::max(t0, t_min);
+            t_max = std::min(t1, t_max);
+            if (t_max <= t_min) return false;
+        }
+        hit_t = t_min;
+        return true;
+    }
+
 }

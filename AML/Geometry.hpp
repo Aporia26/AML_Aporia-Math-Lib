@@ -96,4 +96,15 @@ namespace AML
             return true;
         }
     };
+
+    struct AABB
+    {
+        vec3 min_pt;
+        vec3 max_pt;
+    
+        constexpr AABB() : min_pt(0.0f, 0.0f, 0.0f), max_pt(0.0f, 0.0f, 0.0f) {}
+        constexpr AABB(const vec3& min, const vec3& max) : min_pt(min), max_pt(max) {}
+    };
+
+
 }
